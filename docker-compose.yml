@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  # Serviço para a sua aplicação Rust
+  app:
+    build:
+      context: ./my-rust-app # Caminho para o diretório da sua aplicação Rust onde está o Dockerfile
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000" # Mapeia a porta 8000 do host para a porta 8000 do contêiner
+    environment:
+    depends_on:
+    volumes:
+      # Monta o diretório do seu código-fonte para recarga automática durante o desenvolvimento (opcional)
+      # Remova esta linha em produção se não precisar de hot-reloading
+      - ./my-rust-app:/app
+      # Cache de dependências para builds mais rápidas em desenvolvimento
+      - app_cargo_cache:/usr/local/cargo/registry
+      - app_target_cache:/app/target
+volumes:
+  app_cargo_cache:
+  app_target_cache:

@@ -1,3 +1,6 @@
-#Remove target
+# Target
 target
 target/
+
+# Cargo lock
+Cargo.lock
